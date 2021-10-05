@@ -1,0 +1,347 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Get Course {% endblock %} 
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<!-- <link rel="stylesheet" href="/static/assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/assets/plugins/bootstrap/css/bootstrap.css"> -->
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- <div class="row"> -->
+<!-- <div class="col-md-9 mb-5"> -->
+<div class="col-md-12 mb-5">
+<form method="POST" class="needs-validation" enctype="multipart/form-data" role="form" action="" novalidate>
+        {{ form.hidden_tag() }}
+        <!-- main row start -->
+        <div class="row">  
+    
+        <!-- basic detais about course -->
+        <div class="col">
+                    
+            <legend class="mb-7">{{course.course_name}} Update</legend>
+            <br/>
+        <!--this for loop will show error or success messages-->
+        {%for message in get_flashed_messages() %}
+        {%if message == "success"%}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+           <strong>Congratulation!</strong> Course Updated Successfully
+         </div>
+        {%else%}
+          <div class="alert alert-danger" role="alert">
+            {{message}}
+          </div>
+        {%endif%}
+      {%endfor%}
+      <!--.................................................-->
+      
+            <div class="form-group">
+                <div class="col">{{ form.course_name.label(class="form-control-label",style="color:rgba(138, 135, 135, 0.774)") }}</div>
+                <div class="col-sm-12">
+                    {% if form.course_name.errors %}
+                    {{ form.course_name( class="form-control is-invalid",style="font-size:larger;background: transparent;border-top:0px;border-left: 0px;border-right: 0px;",value=course.course_name ) }}
+                        <div class="invalid-feedback">
+                            {% for error in form.course_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="valid-feedback">Looks good!</div>           
+                        {{ form.course_name(class="form-control",style="font-size:larger;background: transparent;border-top:0px;border-left: 0px;border-right: 0px;",value=course.course_name) }}   
+                    {% endif %}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col">{{ form.discription.label(class="form-control-label",style="color:rgba(138, 135, 135, 0.774)") }}</div>
+                <div class="col-sm-12">
+                {% if form.discription.errors %}
+                    {{ form.discription(class="form-control form-control-lg is-invalid",style="font-size:larger;background: transparent;border-top:0px;border-left: 0px;border-right: 0px;") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.discription.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.discription(class="form-control form-control-lg",style="font-size:larger;background: transparent;border-top:0px;border-left: 0px;border-right: 0px;") }}
+                {% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col">{{ form.prerequisites.label(class="form-control-label",style="color:rgba(138, 135, 135, 0.774)") }}<span style="color: red;">*</span></div>
+            <div class="col-sm-12">
+            {% if form.prerequisites.errors %}
+                {{ form.prerequisites(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.prerequisites.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.prerequisites(class="form-control",style="font-size:larger;background: transparent;border-top:0px;border-left: 0px;border-right: 0px;") }}
+            {% endif %}
+        </div>
+        </div>
+            <div class="form-group">
+                <div class="col">{{ form.category_fk.label(class="form-control-label",style="color:rgba(138, 135, 135, 0.774)") }}</div>
+                <div class="col-sm-12">
+                {% if form.category_fk.errors %}
+                    {{ form.category_fk(class="form-control form-control-lg",style="font-size:larger;background: transparent;border-top:0px;border-left: 0px;border-right: 0px;") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.category_fk.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                  {% else %}
+                    {{ form.category_fk(class="form-control form-control-lg",style="font-size:larger;background: transparent;border-top:0px;border-left: 0px;border-right: 0px;") }}
+                    <div class="valid-feedback">
+                        Looks good!
+                     </div>
+                {% endif %}
+            </div>
+        </div>
+            <div class="form-group ">
+                <div class="col"> {{ form.minage.label(class="form-control-label",style="color:rgba(138, 135, 135, 0.774)") }}</div>
+                <div class="col-sm-12">
+                {% if form.minage.errors %}
+                    {{ form.minage(class="form-control form-control-lg is-invalid",value=course.minage,style="font-size:larger;background: transparent;border-top:0px;border-left: 0px;border-right: 0px;") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.minage.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.minage(class="form-control form-control-lg",value=course.minage,style="font-size:larger;background: transparent;border-top:0px;border-left: 0px;border-right: 0px;") }}
+                {% endif %}
+            </div>
+        </div>
+            <div class="form-group ">
+                <div class="col">{{ form.maxage.label(class="form-control-label",style="color:rgba(138, 135, 135, 0.774)") }}</div>
+                <div class="col-sm-12">
+                {% if form.maxage.errors %}
+                    {{ form.maxage(class="form-control form-control-lg is-invalid",value=course.maxage,style="font-size:larger;background: transparent;border-top:0px;border-left: 0px;border-right: 0px;") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.maxage.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.maxage(class="form-control form-control-lg",value=course.maxage,style="font-size:larger;background: transparent;border-top:0px;border-left: 0px;border-right: 0px;") }}
+                {% endif %}
+            </div>
+        </div>
+        <div class="form-group ">
+                <div class="col">{{ form.coursetype.label(class="form-control-label",style="color:rgba(138, 135, 135, 0.774)") }}</div>
+                <div class="col-sm-12">
+                {% if form.coursetype.errors %}
+                    {{ form.coursetype(class="form-control form-control-lg is-invalid",value=course.coursetype,style="font-size:larger;background: transparent;border-top:0px;border-left: 0px;border-right: 0px;") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.coursetype.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.coursetype(class="form-control form-control-lg",value=course.coursetype,style="font-size:larger;background: transparent;border-top:0px;border-left: 0px;border-right: 0px;") }}
+                {% endif %}
+            </div>
+        </div>
+        <div class="form-group ">
+            <div class="col">{{ form.rating.label(class="form-control-label",style="color:rgba(138, 135, 135, 0.774)") }}</div>
+            <div class="col-sm-12">
+            {% if form.rating.errors %}
+                {{ form.rating(class="form-control form-control-lg is-invalid",value=course.rating,style="font-size:larger;background: transparent;border-top:0px;border-left: 0px;border-right: 0px;") }}
+                <div class="invalid-feedback">
+                    {% for error in form.rating.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.rating(class="form-control form-control-lg",value=course.rating,style="font-size:larger;background: transparent;border-top:0px;border-left: 0px;border-right: 0px;") }}
+            {% endif %}
+        </div>
+        </div>
+        <div class="form-group ">
+            <div class="col">{{ form.remark.label(class="form-control-label",style="color:rgba(138, 135, 135, 0.774)") }}</div>
+            <div class="col-sm-12">
+            {% if form.remark.errors %}
+                {{ form.remark(class="form-control form-control-lg is-invalid",value=course.remark,style="font-size:larger;background: transparent;border-top:0px;border-left: 0px;border-right: 0px;") }}
+                <div class="invalid-feedback">
+                    {% for error in form.remark.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.remark(class="form-control form-control-lg",value=course.remark,style="font-size:larger;background: transparent;border-top:0px;border-left: 0px;border-right: 0px;") }}
+            {% endif %}
+        </div>
+        </div>
+        <div class="form-group ">
+            <div class="col">{{ form.level.label(class="form-control-label",style="color:rgba(138, 135, 135, 0.774)") }}</div>
+            <div class="col-sm-12">
+            {% if form.level.errors %}
+                {{ form.level(class="form-control form-control-lg is-invalid",value=course.level,style="font-size:larger;background: transparent;border-top:0px;border-left: 0px;border-right: 0px;") }}
+                <div class="invalid-feedback">
+                    {% for error in form.level.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.level(class="form-control form-control-lg",value=course.level,style="font-size:larger;background: transparent;border-top:0px;border-left: 0px;border-right: 0px;") }}
+            {% endif %}
+        </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="card " style="width:100%;">
+              <iframe id="broucherid" src="{{COURSE_VIEW_FOLDER}}{{course.course_code}}/{{course.broucher}}" height="250px" class="card-img-top" scroll="auto" alt="..."></iframe>
+              <div class="card-body">
+              {% if form.broucher.errors %}
+                      {{ form.broucher(id='broucher',onchange="showPreviewOne(event)",class="form-control form-control-lg is-invalid file_size",hidden='hidden',accept="application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel",value="{{course.broucher}}") }}
+                      <div class="invalid-feedback">
+                          {% for error in form.broucher.errors %}
+                              <span>{{ error }}</span>
+                          {% endfor %}
+                      </div>
+              {% else %}
+                      {{ form.broucher(id='broucher',onchange="showPreviewOne(event)",class="form-control form-control-lg file_size",hidden='hidden',accept="application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel",value="{{course.broucher}}") }}
+              {% endif %}
+             
+              {{ form.broucher.label(class="form-control-label btn btn-primary",for="broucher") }}
+              <button class="btn btn-primary" type="submit">Save Change</button> 
+      
+              </div>
+            </div>  
+            </div>
+
+
+        <div class="form-group">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                update course
+              </button>
+        </div>
+        
+        <!-- <div class="form-group row">
+            <div class="col"></div>
+            <button type="button" name="submit" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Update Course</button>
+        </div> -->
+      
+          <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Update Course</h5>
+              
+            </div>
+            <div class="modal-body">
+              <span style="color: currentColor;">are you sure you want to update?</span>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- basic details end -->
+    <!-- files details -->
+    <!-- column two -->
+    <div class="col">
+    
+        <div class="col">
+        <div class="card" style="width: 25rem;">
+            <img id="thumbnail_imageid" src="{{COURSE_VIEW_FOLDER}}{{course.course_code}}/{{course.thumbnail_image}}" height="250px" class="card-img-top" alt="...">
+            <div class="card-body">
+            {% if form.thumbnail_image.errors %}
+                    {{ form.thumbnail_image(id='thumbnail_image',onchange="showPreviewOne(event)",class="form-control form-control-lg is-invalid file_size",hidden='hidden',accept='image/*') }}
+                    <div class="invalid-feedback">
+                        {% for error in form.thumbnail_image.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+            {% else %}
+                    {{ form.thumbnail_image(id='thumbnail_image',onchange="showPreviewOne(event)",class="form-control form-control-lg file_size",hidden='hidden',accept='image/*') }}
+            {% endif %}
+            {{ form.thumbnail_image.label(class="form-control-label btn btn-primary",value='Change',for="thumbnail_image") }}
+            <button class="btn btn-primary" type="submit">Save Change</button> 
+    
+            </div>
+          </div>  
+          </div>
+          
+          <div class="col">
+            <div class="card " style="width: 25rem;">
+              <iframe id="videoid" src="{{COURSE_VIEW_FOLDER}}{{course.course_code}}/{{course.video}}" height="250px" class="card-img-top" scroll="auto" alt="..."></iframe>
+              <div class="card-body">
+              {% if form.video.errors %}
+                      {{ form.video(id='video',onchange="showPreviewOne(event)",class="form-control form-control-lg is-invalid file_size",hidden='hidden',accept='video/*') }}
+                      <div class="invalid-feedback">
+                          {% for error in form.video.errors %}
+                              <span>{{ error }}</span>
+                          {% endfor %}
+                      </div>
+              {% else %}
+                      {{ form.video(id='video',onchange="showPreviewOne(event)",class="form-control form-control-lg file_size",hidden='hidden',accept='video/*') }}
+              {% endif %}
+              {{ form.video.label(class="form-control-label btn btn-primary",id="vid",value='Change',for="video") }}
+             <button class="btn btn-primary" type="submit">Save Change</button>
+        
+              </div>
+            </div>  
+            </div>
+          
+    
+        
+    
+     
+    </div>
+    <!-- column three -->
+    
+     
+
+<!-- main row -->
+</div>
+ </form>
+</div>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+
+{% block javascripts %}
+<script>
+
+    function showPreviewOne(event){
+      if(event.target.files.length > 0){
+        let src = URL.createObjectURL(event.target.files[0]);
+        let fid=event.target.id+'id'
+        let preview = document.getElementById(fid);
+        preview.src = src;
+        preview.style.display = "block";
+      } 
+    }
+   
+
+// size limit for images,video and broucher
+    $(document).ready(function(){
+   maxfilesize=10*1024*1024;
+   $(".file_size").change(function(){
+      filesize = this.files[0].size;
+
+      if (filesize > maxfilesize){
+         this.setCustomValidity("you can only upload file under 10 MB");
+          this.reportValidity();
+          this.value=""
+      }
+      else{
+              this.setCustomValidity("");
+      }
+   })
+}
+)
+
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+{% endblock javascripts %}

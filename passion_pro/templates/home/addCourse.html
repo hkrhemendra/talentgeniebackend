@@ -1,0 +1,247 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Add Course {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<!-- <link rel="stylesheet" href="/static/assets/plugins/bootstrap/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="/static/assets/plugins/bootstrap/css/bootstrap.css"> -->
+{% endblock stylesheets %}
+
+{% block content %}
+
+
+   
+  <div class="col-md-9 mb-5">
+  <form method="POST" class="needs-validation" enctype="multipart/form-data" role="form" action="" novalidate>
+    {{ form.hidden_tag() }}
+    <br/> 
+    <fieldset class="form-group"> 
+        <br/>           
+        <legend class="border-bottom mb-7">Course Details</legend>
+
+    <!--this for loop will show error or success messages-->
+    {%for message in get_flashed_messages() %}
+    {%if message == "success"%}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+       <strong>Congratulation!</strong> Course Added Successfully
+     </div>
+    {%else%}
+      <div class="alert alert-danger" role="alert">
+        {{message}}
+      </div>
+    {%endif%}
+  {%endfor%}
+  <!--.................................................-->
+        <div class="form-group">
+            {{ form.course_name.label(class="form-control-label") }}<span style="color: red;">*</span>
+
+            {% if form.course_name.errors %}
+                {{ form.course_name(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.course_name.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+             <div class="valid-feedback">
+                    Looks good!
+                 </div>           
+                {{ form.course_name(class="form-control") }}
+               
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.discription.label(class="form-control-label") }}<span style="color: red;">*</span>
+            {% if form.discription.errors %}
+                {{ form.discription(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.discription.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.discription(class="form-control") }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.prerequisites.label(class="form-control-label") }}<span style="color: red;">*</span>
+            {% if form.prerequisites.errors %}
+                {{ form.prerequisites(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.prerequisites.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.prerequisites(class="form-control") }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.category_fk.label(class="form-control-label") }}<span style="color: red;">*</span>
+            {% if form.category_fk.errors %}
+                {{ form.category_fk(class="form-control")}}
+                <div class="invalid-feedback">
+                    {% for error in form.category_fk.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+              {% else %}
+                {{ form.category_fk(class="form-control") }}
+                <div class="valid-feedback">
+                    Looks good!
+                 </div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.minage.label(class="form-control-label") }}<span style="color: red;">*</span>
+            {% if form.minage.errors %}
+                {{ form.minage(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.minage.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.minage(class="form-control") }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.maxage.label(class="form-control-label") }}<span style="color: red;">*</span>
+            {% if form.maxage.errors %}
+                {{ form.maxage(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.maxage.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.maxage(class="form-control") }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.coursetype.label(class="form-control-label") }}<span style="color: red;">*</span>
+            {% if form.coursetype.errors %}
+                {{ form.coursetype(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.coursetype.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.coursetype(class="form-control") }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.rating.label(class="form-control-label") }} Out Of 10 <span style="color: red;">*</span>
+            {% if form.rating.errors %}
+                {{ form.rating(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.rating.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.rating(class="form-control") }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.remark.label(class="form-control-label") }}
+            {% if form.remark.errors %}
+                {{ form.remark(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.remark.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.remark(class="form-control") }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.level.label(class="form-control-label") }}<span style="color: red;">*</span>
+            {% if form.level.errors %}
+                {{ form.level(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.level.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.level(class="form-control") }}
+            {% endif %}
+        </div>
+     
+        <div class="form-group">
+            {{ form.broucher.label(class="form-control-label")}}<span style="color: red;">*</span>
+            {% if form.broucher.errors %}
+                {{ form.broucher(class="form-control is-invalid file_size",accept="application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel") }}
+                <div class="invalid-feedback">
+                    {% for error in form.broucher.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.broucher(class="form-control file_size",accept="application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel") }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.thumbnail_image.label(class="form-control-label") }}<span style="color: red;">*</span>
+            {% if form.thumbnail_image.errors %}
+                {{ form.thumbnail_image(class="form-control is-invalid file_size",accept="image/*") }}
+                <div class="invalid-feedback">
+                    {% for error in form.thumbnail_image.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.thumbnail_image(class="form-control file_size",accept="image/*",multiple='multiple') }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.video.label(class="form-control-label") }}<span style="color: red;">*</span>
+            {% if form.video.errors %}
+                {{ form.video(class="form-control is-invalid file_size",accept="video/*",value=form.video.data) }}
+                <div class="invalid-feedback">
+                    {% for error in form.video.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.video(class="form-control file_size",accept="video/*",value=form.video.data) }}
+            {% endif %}
+        </div>
+    </fieldset>
+    <div class="form-group">
+        <button type="submit" class="btn btn-outline-info">Add Course</button>
+    </div>
+</form>
+</div>
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+// size limit for images,video and broucher
+    $(document).ready(function(){
+   maxfilesize=10*1024*1024;
+   $(".file_size").change(function(){
+      filesize = this.files[0].size;
+
+      if (filesize > maxfilesize){
+         this.setCustomValidity("you can only upload file under 10 MB");
+          this.reportValidity();
+          this.value=""
+      }
+      else{
+              this.setCustomValidity("");
+      }
+   })
+}
+)
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+{% endblock javascripts %}

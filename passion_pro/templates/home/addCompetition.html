@@ -1,0 +1,244 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Add Batch {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+<form role="form" method="post" action="" enctype="multipart/form-data" class="col-md-6 needs-validation" novalidate>
+
+    <h3>Fill Competition details</h3>
+
+    <!--this for loop will show error or success messages-->
+    {%for message in get_flashed_messages() %}
+    {%if message == "success"%}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+       <strong>Congratulation!</strong> Course Added Successfully
+     </div>
+    {%else%}
+      <div class="alert alert-danger" role="alert">
+        {{message}}
+      </div>
+    {%endif%}
+  {%endfor%}
+
+    {{ form.hidden_tag() }}                    
+
+    <div class="form-group">
+        {{ form.title.label(class="form-control-label") }}<span style="color: red;">*</span>
+
+        {% if form.title.errors %}
+            {{ form.title(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.title.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+         <div class="valid-feedback">
+                Looks good!
+             </div>           
+            {{ form.title(class="form-control form-control-lg") }}
+           
+        {% endif %}
+    </div>
+
+    
+    <div class="form-group">
+        {{ form.competition_start_time.label(class="form-control-label") }}<span style="color: red;">*</span>
+        {% if form.competition_start_time.errors %}
+            {{ form.competition_start_time(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.competition_start_time.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.competition_start_time(class="form-control form-control-lg") }}
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form.competition_end_time.label(class="form-control-label") }}<span style="color: red;">*</span>
+        {% if form.competition_end_time.errors %}
+            {{ form.competition_end_time(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.competition_end_time.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.competition_end_time(class="form-control form-control-lg") }}
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form.registration_start.label(class="form-control-label") }}<span style="color: red;">*</span>
+        {% if form.registration_start.errors %}
+            {{ form.registration_start(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.registration_start.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.registration_start(class="form-control form-control-lg") }}
+        {% endif %}
+    </div>
+
+
+    <div class="form-group">
+        {{ form.registration_end.label(class="form-control-label") }}<span style="color: red;">*</span>
+        {% if form.registration_end.errors %}
+            {{ form.registration_end(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.registration_end.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.registration_end(class="form-control form-control-lg") }}
+        {% endif %}
+    </div>
+
+
+    <div class="form-group">
+        {{ form.category_fk.label(class="form-control-label") }}<span style="color: red;">*</span>
+        {% if form.category_fk.errors %}
+            {{ form.category_fk(class="form-control form-control-lg") }}
+            <div class="invalid-feedback">
+                {% for error in form.category_fk.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+          {% else %}
+            {{ form.category_fk(class="form-control form-control-lg") }}
+            <div class="valid-feedback">
+                Looks good!
+             </div>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form.image.label(class="form-control-label") }}<span style="color: red;">*</span>
+        {% if form.image.errors %}
+            {{ form.image(class="form-control form-control-lg is-invalid file_size",accept="image/*") }}
+            <div class="invalid-feedback">
+                {% for error in form.image.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.image(class="form-control form-control-lg file_size",accept="image/*",multiple='multiple') }}
+        {% endif %}
+    </div>
+
+
+    <div class="form-group">
+        {{ form.minage.label(class="form-control-label") }}<span style="color: red;">*</span>
+        {% if form.minage.errors %}
+            {{ form.minage(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.minage.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.minage(class="form-control form-control-lg") }}
+        {% endif %}
+    </div>
+    <div class="form-group">
+        {{ form.maxage.label(class="form-control-label") }}<span style="color: red;">*</span>
+        {% if form.maxage.errors %}
+            {{ form.maxage(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.maxage.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.maxage(class="form-control form-control-lg") }}
+        {% endif %}
+    </div>
+    
+
+    <div class="form-group">
+        {{ form.gender.label(class="form-control-label") }}
+        {% if form.gender.errors %}
+            {{ form.gender(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.gender.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.gender(class="form-control form-control-lg") }}
+        {% endif %}
+    </div>
+
+
+    <div class="form-group">
+        {{ form.remark.label(class="form-control-label") }}<span style="color: red;">*</span>
+        {% if form.remark.errors %}
+            {{ form.remark(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.remark.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.remark(class="form-control form-control-lg") }}
+        {% endif %}
+    </div>
+
+
+
+    <div class="form-group">
+        {{ form.discription.label(class="form-control-label") }}<span style="color: red;">*</span>
+        {% if form.discription.errors %}
+            {{ form.discription(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.discription.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.discription(class="form-control form-control-lg") }}
+        {% endif %}
+    </div>
+
+
+
+
+
+    <button type="submit" name="Add" class="btn btn-primary shadow-2 mt-4">Add</button>
+
+</form>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+    // size limit for images,video and broucher
+        $(document).ready(function(){
+       maxfilesize=10*1024*1024;
+       $(".file_size").change(function(){
+          filesize = this.files[0].size;
+    
+          if (filesize > maxfilesize){
+             this.setCustomValidity("you can only upload file under 10 MB");
+              this.reportValidity();
+              this.value=""
+          }
+          else{
+                  this.setCustomValidity("");
+          }
+       })
+    }
+    )
+    </script>
+
+{% endblock javascripts %}

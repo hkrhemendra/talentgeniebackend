@@ -1,0 +1,200 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Update Batch {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+<form role="form" method="post" action="" class="col-md-9" novalidate>
+    {{ form.hidden_tag() }}   
+    <br>
+    <h3 class="border-bottom mb-7">Update Batch details</h3>
+    <br>
+    
+    {%for message in get_flashed_messages() %}
+    {%if message == "success"%}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+       <strong>Congratulation!</strong>  Updated Successfully
+     </div>
+    {%else%}
+      <div class="alert alert-danger" role="alert">
+        {{message}}
+      </div>
+    {%endif%}
+  {%endfor%}
+    
+    {{form.category.label}}
+    <div class="input-group mb-1">
+        {{ form.category(class="form-control", onchange="location= '?category='+this.value;") }}
+    </div>
+
+    {{form.courses.label}}
+    <div class="input-group mb-1">
+        {{ form.courses(class="form-control") }}
+    </div>
+    
+    {% for error in form.courses.errors %}
+        <div style="color: red;">*{{ error }}</div>
+    {% endfor %}
+
+    {{form.user_fk.label}}
+    <div class="input-group mb-1">
+        {{ form.user_fk(class="form-control") }}
+    </div>
+    
+    {% for error in form.user_fk.errors %}
+        <div style="color: red;">*{{ error }}</div>
+    {% endfor %}
+
+    {{form.batch_size.label}}
+    <div class="input-group mb-1">
+        {{ form.batch_size(placeholder="Batch capacity", class="form-control",value=batch.batch_size) }}
+    </div>
+    
+    {% for error in form.batch_size.errors %}
+        <div style="color: red;">*{{ error }}</div>
+    {% endfor %}
+
+    {{form.price.label}}
+    <div class="input-group mb-1">
+        {{ form.price(placeholder="Price", class="form-control",value=batch.price) }}
+    </div>  
+    {% for error in form.price.errors %}
+        <div style="color: red;">*{{ error }}</div>
+    {% endfor %}
+
+    {{form.discount.label}}
+    <div class="input-group mb-1">
+        {{ form.discount( class="form-control",value=batch.discount) }}
+    </div>
+    {% for error in form.discount.errors %}
+        <div style="color: red;">*{{ error }}</div>
+    {% endfor %}
+
+
+    {{form.batch_start.label}}
+    <div class="input-group mb-1">
+        {{ form.batch_start(type="date", class="form-control",value=batch.batch_start) }}
+    </div>
+    
+    {% for error in form.batch_start.errors %}
+        <div style="color: red;">*{{ error }}</div>
+    {% endfor %}
+    {{form.batch_end.label}}
+    <div class="input-group mb-1">
+        
+        {{ form.batch_end(type="date", class="form-control",value=batch.batch_end) }}
+    </div>
+    
+    {% for error in form.batch_end.errors %}
+        <div style="color: red;">*{{ error }}</div>
+    {% endfor %}
+
+    <div>
+        <span>{{form.time_from.label}}</span>&emsp; &emsp; &emsp; &emsp; &ensp; <span>{{form.time_to.label}}</span>
+    </div>
+    <div class="input-group mb-1">
+        <span>{{ form.time_from(type="time", class="form-control",value=batch.time_from )}}</span>
+        &emsp; &emsp; 
+        <span>{{ form.time_to(type="time", class="form-control",value=batch.time_to )}}</span>
+    </div>
+    {% for error in form.time_from.errors %}
+        <div style="color: red;">*{{ error }}</div>
+    {% endfor %}
+    
+    {% for error in form.time_to.errors %}
+        <div style="color: red;">*{{ error }}</div>
+    {% endfor %}
+    
+    {{form.rating.label}}
+    <span>&ensp;(you can select multiple with ctrl)</span>
+    <div class="input-group mb-1">
+        {{ form.rating(class="form-control") }}
+    </div>
+
+    {% for error in form.rating.errors %}
+        <div style="color: red;">*{{ error }}</div>
+    {% endfor %}
+        
+    {{form.weekDays.label}}
+    <span>&ensp;(you can select multiple with ctrl)</span>
+    <div>Previous : {{batch.weekDays}}</div>
+    <div class="input-group mb-1">
+        {{ form.weekDays(class="form-control",size="7", multiple= True) }}
+    </div>
+    
+    {% for error in form.weekDays.errors %}
+        <div style="color: red;">*{{ error }}</div>
+    {% endfor %}
+
+      <!--remark-->
+    <div class="input-group">
+        {{form.remark.label}}
+    </div>
+    <div class="input-group mb-1">
+        {{ form.remark(class="form-control") }}
+    </div>
+    {% for error in form.remark.errors %}
+        <div style="color: red;">*{{ error }}</div>
+    {% endfor %}
+
+    <div class="input-group">
+        {{form.link.label}}
+    </div>
+    <div class="input-group mb-1">
+        {{ form.link(class="form-control") }}
+    </div>
+    {% for error in form.link.errors %}
+        <div style="color: red;">*{{ error }}</div>
+    {% endfor %}
+
+    <div class="input-group">
+        {{form.meetingid.label}}
+    </div>
+    <div class="input-group mb-1">
+        {{ form.meetingid(class="form-control") }}
+    </div>
+    {% for error in form.meetingid.errors %}
+        <div style="color: red;">*{{ error }}</div>
+    {% endfor %}
+
+    <div class="input-group">
+        {{form.meetingpass.label}}
+    </div>
+    <div class="input-group mb-1">
+        {{ form.meetingpass(class="form-control") }}
+    </div>
+    {% for error in form.meetingpass.errors %}
+        <div style="color: red;">*{{ error }}</div>
+    {% endfor %}
+
+    <div class="input-group">
+        Description
+    </div>
+    <div class="input-group mb-1">
+        {{ form.discription(class="form-control") }}
+    </div>
+    {% for error in form.discription.errors %}
+        <div style="color: red;">*{{ error }}</div>
+    {% endfor %}
+    <br>
+    
+    <div class="input-group mb-1">
+        {{ form.is_active }}&emsp;{{form.is_active.label}}*
+    </div>
+    {% for error in form.is_active.errors %}
+        <div style="color: red;">*{{ error }}</div>
+    {% endfor %}
+    
+   
+
+    <button type="submit"class="btn btn-primary shadow-2 mt-4">Update</button>
+
+</form>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

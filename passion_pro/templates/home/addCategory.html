@@ -1,0 +1,170 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Add Category {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+<form role="form" method="post" action="" enctype="multipart/form-data" class="col-md-6 needs-validation" novalidate>
+
+    <h3>Fill Category details</h3>
+
+    <!--this for loop will show error or success messages-->
+    {%for message in get_flashed_messages() %}
+    {%if message == "success"%}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+       <strong>Congratulation!</strong> Category Added Successfully
+     </div>
+    {%else%}
+      <div class="alert alert-danger" role="alert">
+        {{message}}
+      </div>
+    {%endif%}
+  {%endfor%}
+
+    {{ form.hidden_tag() }}                    
+
+    <div class="form-group">
+        {{ form.name.label(class="form-control-label") }}<span style="color: red;">*</span>
+    
+        {% if form.name.errors %}
+            {{ form.name(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.name.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+         <div class="valid-feedback">
+                Looks good!
+             </div>           
+            {{ form.name(class="form-control form-control-lg") }}
+           
+        {% endif %}
+    </div>
+
+    
+    <div class="form-group">
+        {{ form.discription.label(class="form-control-label") }}<span style="color: red;">*</span>
+        {% if form.discription.errors %}
+            {{ form.discription(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.discription.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.discription(class="form-control form-control-lg") }}
+        {% endif %}
+    </div>
+
+
+    <div class="form-group">
+        {{ form.remark.label(class="form-control-label") }}<span style="color: red;">*</span>
+        {% if form.remark.errors %}
+            {{ form.remark(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.remark.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.remark(class="form-control form-control-lg") }}
+        {% endif %}
+    </div>
+
+
+    <div class="form-group">
+        {{ form.state.label(class="form-control-label") }}<span style="color: red;">*</span>
+        {% if form.state.errors %}
+            {{ form.state(class="form-control form-control-lg") }}
+            <div class="invalid-feedback">
+                {% for error in form.state.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+          {% else %}
+            {{ form.state(class="form-control form-control-lg") }}
+            <div class="valid-feedback">
+                Looks good!
+             </div>
+        {% endif %}
+    </div>
+    
+    <div class="form-group">
+        {{ form.ranking.label(class="form-control-label") }}<span style="color: red;">*</span>
+        {% if form.ranking.errors %}
+            {{ form.ranking(class="form-control form-control-lg") }}
+            <div class="invalid-feedback">
+                {% for error in form.ranking.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+          {% else %}
+            {{ form.ranking(class="form-control form-control-lg") }}
+            <div class="valid-feedback">
+                Looks good!
+             </div>
+        {% endif %}
+    </div>
+    
+
+    <div class="form-group">
+        {{ form.image.label(class="form-control-label") }}<span style="color: red;">*</span>
+        {% if form.image.errors %}
+            {{ form.image(class="form-control form-control-lg is-invalid file_size",accept="image/*") }}
+            <div class="invalid-feedback">
+                {% for error in form.image.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.image(class="form-control form-control-lg file_size",accept="image/*",multiple='multiple') }}
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form.video.label(class="form-control-label") }}<span style="color: rgb(95, 95, 95);">(optional)</span>
+        {% if form.video.errors %}
+            {{ form.video(class="form-control form-control-lg is-invalid file_size",accept="video/*",value=form.video.data) }}
+            <div class="invalid-feedback">
+                {% for error in form.video.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.video(class="form-control form-control-lg file_size",accept="video/*",value=form.video.data) }}
+        {% endif %}
+    </div>
+
+    <button type="submit" class="btn btn-primary shadow-2 mt-4">Add</button>
+
+</form>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+    // size limit for images,video and broucher
+        $(document).ready(function(){
+       maxfilesize=10*1024*1024;
+       $(".file_size").change(function(){
+          filesize = this.files[0].size;
+    
+          if (filesize > maxfilesize){
+             this.setCustomValidity("you can only upload file under 10 MB");
+              this.reportValidity();
+              this.value=""
+          }
+          else{
+                  this.setCustomValidity("");
+          }
+       })
+    }
+    )
+    </script>
+
+{% endblock javascripts %}

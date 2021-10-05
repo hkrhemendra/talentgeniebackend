@@ -1,0 +1,92 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Get Competitions {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+{% endblock stylesheets %}
+
+{% block content %}
+<br>
+
+<div class="container-fluid">
+  
+  {%for message in get_flashed_messages() %}
+  {%if message == "success"%}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+     <strong>updated!</strong> Successfully
+   </div>
+  {%else%}
+    <div class="alert alert-danger" role="alert">
+      {{message}}
+    </div>
+  {%endif%}
+{%endfor%}
+  <table id="table_id" class="display">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Competition Start</th>       
+            <th>Competition End</th>   
+            <th>Registration Start</th>
+            <th>Registration End</th>
+            <th>Category</th>
+            <th>Age Limit</th>
+            <th>Code</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Last Update</th>
+            <th>View</th>
+        </tr>
+    </thead>
+    <tbody>
+      {%for compt,category in data %}
+        <tr>
+            <td>{{compt.id}}</td>
+            <td>{{compt.title}}</td>
+            <td>{{compt.competition_start_time}}</td>
+            <td>{{compt.competition_end_time}}</td>
+            <td>{{compt.registration_start}}</td>
+            <td>{{compt.registration_end}}</td>
+            <td>{{category.category_name}}</td>
+            <td>{{compt.minage}}-{{compt.maxage}}</td>
+            <td>{{compt.code}}</td>
+            <td>
+              {%if compt.competition_start_time > today%}
+              upcoming
+              {%elif compt.competition_end_time < today %}
+              ended
+              {%else%}
+              ongoing
+              {%endif%}
+            </td>
+            <td>{{compt.created_at}}</td>
+            <td>{{compt.updated_at}}</td>
+            <td><a href="/viewCompetition?id={{compt.id}}"><i class="fas fa-external-link-alt"></i></a></td>
+        </tr>
+         
+      {%endfor%}
+    </tbody>
+  </table>
+  
+</div>
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
+<script>
+  $(document).ready( function () {
+    $('#table_id').DataTable();
+  } );
+
+
+
+</script>
+{% endblock javascripts %}

@@ -1,0 +1,10 @@
+COURSE_UPLOAD_FOLDER='passion_pro/static/assets/courses/'
+COURSE_VIEW_FOLDER='/static/assets/courses/'
+COMPT_UPLOAD_FOLDER='passion_pro/static/assets/competitions/'
+COMPT_VIEW_FOLDER='/static/assets/competitions/'
+CATEGORY_UPLOAD_FOLDER='passion_pro/static/assets/categories/'
+CATEGORY_VIEW_FOLDER='/static/assets/categories/'
+TEACHERS_FOLDER='passion_pro/static/assets/teachers/'
+TEACHERS_VIEW_FOLDER = "/static/assets/teachers/"
+STUDENT_UPLOAD_FOLDER='passion_pro/static/assets/students/'
+STUDENT_VIEW_FOLDER = "/static/assets/students/"
